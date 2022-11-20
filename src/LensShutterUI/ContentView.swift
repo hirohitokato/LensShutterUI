@@ -13,16 +13,19 @@ struct ContentView: View {
     @State var angle: Double = 0.0
     var body: some View {
         VStack {
-            ZStack {
-                ForEach(0..<Int(numVertices), id:\.self) { i in
-                    Rectangle()
-                        .frame(width: 80,height: 160, alignment: .center)
-                        .foregroundColor(.blue)
-                        .offset(x:-40,y:-80)
-                        .rotationEffect(vertexAngle(i))
-                        .offset(vertexPos(i))
-                        .shadow(radius: 3)
-                }
+            GeometryReader { proxy in
+                    ForEach(0..<Int(numVertices), id:\.self) { i in
+                        Rectangle()
+                            .frame(width: proxy.size.width,
+                                   height: proxy.size.height*2,
+                                   alignment: .bottom)
+                            .offset(x:-proxy.size.width / 2,
+                                    y:-proxy.size.height / 2)
+                            .foregroundColor(.secondary)
+                            .rotationEffect(vertexAngle(i))
+                            .offset(vertexPos(i, size: proxy.size))
+                            .shadow(radius: 3)
+                    }.mask(Rectangle())
             }
             Image(systemName: "globe")
                 .imageScale(.large)
@@ -46,29 +49,15 @@ struct ContentView: View {
         return Angle(degrees: initialOffset + degree + additionalOffset)
     }
 
-    func vertexPos(_ i: Int) -> CGSize {
+    func vertexPos(_ i: Int, size: CGSize) -> CGSize {
+        let dx = size.width / 2
+        let dy = size.height / 2
+        let radius = sqrt(dx * dx + dy * dy)
         let vertices = RegularPolygonCalculator.getVertices(
             Int(numVertices),
-            radius: 100, offset: 0)
+            radius: radius, offset: 0)
         return CGSize(width: vertices[i].x,
                       height: vertices[i].y)
-    }
-
-    func slider<V, C>(
-        value: Binding<V>,
-        in bounds: ClosedRange<V> = 0...1,
-        step: V.Stride = 1,
-        label: () -> C,
-        onEditingChanged: @escaping (Bool) -> Void = { _ in })
-    -> some View where V: BinaryFloatingPoint, V.Stride: BinaryFloatingPoint, C: View {
-        HStack {
-            label()
-            Slider(value: value,
-                   in: bounds,
-                   step: step,
-                   onEditingChanged: onEditingChanged,
-                   label: {EmptyView()})
-        }
     }
 }
 
