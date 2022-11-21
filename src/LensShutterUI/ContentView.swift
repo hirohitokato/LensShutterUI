@@ -17,7 +17,7 @@ struct ContentView: View {
                     ForEach(0..<Int(numVertices), id:\.self) { i in
                         Rectangle()
                             .frame(width: proxy.size.width,
-                                   height: proxy.size.height*2,
+                                   height: proxy.size.height*3,
                                    alignment: .bottom)
                             .offset(x:-proxy.size.width / 2,
                                     y:-proxy.size.height / 2)
@@ -57,7 +57,7 @@ struct ContentView: View {
             Int(numVertices),
             radius: radius, offset: 0)
         return CGSize(width: vertices[i].x,
-                      height: vertices[i].y)
+                      height: vertices[i].y - size.height)
     }
 }
 
