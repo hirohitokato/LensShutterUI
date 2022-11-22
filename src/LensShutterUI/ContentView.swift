@@ -33,9 +33,22 @@ struct ContentView: View {
             Slider(value: $numVertices, in: 2...10, step: 1) {
                 Text("N角形(\(Int(numVertices)))：")
             }
-            Slider(value: $angle,
-                   in: 0...(RegularPolygonCalculator.interiorAngle(Int(numVertices))/2)) {
-                Text("回転角(\(Int(angle)))：")
+            HStack {
+                Button(action: {
+                    withAnimation {
+                        if angle == 0.0 {
+                            angle = RegularPolygonCalculator.interiorAngle(Int(numVertices))/2
+                        } else {
+                            angle = 0
+                        }
+                    }
+                }) {
+                    Text("Take")
+                }
+                Slider(value: $angle,
+                       in: 0...(RegularPolygonCalculator.interiorAngle(Int(numVertices))/2)) {
+                    Text("回転角(\(Int(angle)))：")
+                }
             }
         }
         .padding()
