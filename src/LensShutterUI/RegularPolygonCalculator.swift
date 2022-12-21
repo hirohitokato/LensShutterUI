@@ -42,6 +42,9 @@ class RegularPolygonCalculator {
     ///   - numVertices: 正N角形の頂点の数。2以上の値を取る
     /// - Returns: 内角。単位:度
     static func interiorAngle(_ numVertices: Int) -> Double {
+        guard numVertices >= 2 else {
+            fatalError("number of vertices must be greater than 1.")
+        }
         let n = Double(numVertices)
         return (180 * (n - 2)) / n
     }
