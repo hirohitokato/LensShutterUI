@@ -58,7 +58,7 @@ struct LensShutterView: View {
 }
 
 struct LensShutterView_Previews: PreviewProvider {
-    @State static var numVertices: Int = 4
+    @State static var numVertices: Int = 8
     @State static var angle: Double = 0.0
     static var previews: some View {
         LensShutterView(numVertices: $numVertices, angle: $angle)
