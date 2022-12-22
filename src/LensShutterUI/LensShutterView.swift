@@ -9,6 +9,7 @@ import SwiftUI
 
 
 /// レンズシャッターを模擬するビュー
+///  @TODO: 羽根の前後関係が完全ではないのを修正
 struct LensShutterView: View {
     /// 羽根の数
     @Binding var numVertices: Int
