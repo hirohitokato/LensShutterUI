@@ -16,9 +16,6 @@ struct ContentView: View {
     var body: some View {
         VStack {
             LensShutterView(numVertices: $numVertices, angle: $angle)
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
             Slider(value: $numVerticesDouble, in: 2...10, step: 1,
                    label: { Text("N角形(\(Int(numVerticesDouble)))：") },
                    onEditingChanged: { _ in
