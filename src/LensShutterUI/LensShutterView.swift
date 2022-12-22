@@ -1,6 +1,5 @@
 //
 //  LensShutterView.swift
-//  LensShutterUI
 //
 //  Created by Kato Hirohito on 2022/12/20.
 //
@@ -11,7 +10,7 @@ import SwiftUI
 /// レンズシャッターを模擬するビュー
 ///  @TODO: 羽根の前後関係が完全ではないのを修正
 struct LensShutterView: View {
-    /// 羽根の数
+    /// 羽根の枚数
     @Binding var numVertices: Int
     /// 羽根の角度。0.0-1.0で指定する。1.0が羽根を閉じた状態
     @Binding var angle: Double
